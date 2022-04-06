@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #define SAMPLERATE (25000000 / 512)
 
@@ -37,7 +38,7 @@ audio_callback(void *userdata, Uint8 *stream, int len)
 
 	int expected = 2 * SAMPLES_PER_BUFFER * sizeof(int16_t);
 	if (len != expected) {
-		printf("Audio buffer size mismatch! (expected: %d, got: %d)\n", expected, len);
+		fprintf(stderr, "Audio buffer size mismatch! (expected: %d, got: %d)\n", expected, len);
 		return;
 	}
 
@@ -77,8 +78,17 @@ audio_init(const char *dev_name, int num_audio_buffers)
 
 	// Allocate audio buffers
 	buffers = malloc(num_bufs * sizeof(*buffers));
+	if (!buffers) {
+		fprintf(stderr, "Cannot allocate audio buffers: %s\n", strerror(errno));
+		exit(1);
+	}
+
 	for (int i = 0; i < num_bufs; i++) {
 		buffers[i] = malloc(2 * SAMPLES_PER_BUFFER * sizeof(buffers[0][0]));
+		if (!buffers[i]) {
+			fprintf(stderr, "Cannot allocate audio buffers: %s\n", strerror(errno));
+			exit(1);
+		}
 	}
 
 	SDL_AudioSpec desired;

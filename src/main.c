@@ -189,7 +189,7 @@ machine_dump()
 	}
 	SDL_RWops *f = SDL_RWFromFile(filename, "wb");
 	if (!f) {
-		printf("Cannot write to %s!\n", filename);
+		fprintf(stderr, "Cannot write to %s!\n", filename);
 		return;
 	}
 
@@ -336,94 +336,94 @@ is_kernal()
 static void
 usage()
 {
-	printf("\nCommander X16 Emulator r%s (%s)\n", VER, VER_NAME);
-	printf("(C)2019,2022 Michael Steil et al.\n");
-	printf("All rights reserved. License: 2-clause BSD\n\n");
-	printf("Usage: x16emu [option] ...\n\n");
-	printf("-rom <rom.bin>\n");
-	printf("\tOverride KERNAL/BASIC/* ROM file.\n");
-	printf("-ram <ramsize>\n");
-	printf("\tSpecify banked RAM size in KB (8, 16, 32, ..., 2048).\n");
-	printf("\tThe default is 512.\n");
-	printf("-nvram <nvram.bin>\n");
-	printf("\tSpecify NVRAM image. By default, the machine starts with\n");
-	printf("\tempty NVRAM and does not save it to disk.\n");
-	printf("-keymap <keymap>\n");
-	printf("\tEnable a specific keyboard layout decode table.\n");
-	printf("-sdcard <sdcard.img>\n");
-	printf("\tSpecify SD card image (partition map + FAT32)\n");
-	printf("-prg <app.prg>[,<load_addr>]\n");
-	printf("\tLoad application from the local disk into RAM\n");
-	printf("\t(.PRG file with 2 byte start address header)\n");
-	printf("\tThe override load address is hex without a prefix.\n");
-	printf("-bas <app.txt>\n");
-	printf("\tInject a BASIC program in ASCII encoding through the\n");
-	printf("\tkeyboard.\n");
-	printf("-run\n");
-	printf("\tStart the -prg/-bas program using RUN or SYS, depending\n");
-	printf("\ton the load address.\n");
-	printf("-geos\n");
-	printf("\tLaunch GEOS at startup.\n");
-	printf("-warp\n");
-	printf("\tEnable warp mode, run emulator as fast as possible.\n");
-	printf("-echo [{iso|raw}]\n");
-	printf("\tPrint all KERNAL output to the host's stdout.\n");
-	printf("\tBy default, everything but printable ASCII characters get\n");
-	printf("\tescaped. \"iso\" will escape everything but non-printable\n");
-	printf("\tISO-8859-1 characters and convert the output to UTF-8.\n");
-	printf("\t\"raw\" will not do any substitutions.\n");
-	printf("\tWith the BASIC statement \"LIST\", this can be used\n");
-	printf("\tto detokenize a BASIC program.\n");
-	printf("-log {K|S|V}...\n");
-	printf("\tEnable logging of (K)eyboard, (S)peed, (V)ideo.\n");
-	printf("\tMultiple characters are possible, e.g. -log KS\n");
-	printf("-gif <file.gif>[,wait]\n");
-	printf("\tRecord a gif for the video output.\n");
-	printf("\tUse ,wait to start paused.\n");
-	printf("\tPOKE $9FB5,2 to start recording.\n");
-	printf("\tPOKE $9FB5,1 to capture a single frame.\n");
-	printf("\tPOKE $9FB5,0 to pause.\n");
-	printf("-scale {1|2|3|4}\n");
-	printf("\tScale output to an integer multiple of 640x480\n");
-	printf("-quality {nearest|linear|best}\n");
-	printf("\tScaling algorithm quality\n");
-	printf("-debug [<address>]\n");
-	printf("\tEnable debugger. Optionally, set a breakpoint\n");
-	printf("-dump {C|R|B|V}...\n");
-	printf("\tConfigure system dump: (C)PU, (R)AM, (B)anked-RAM, (V)RAM\n");
-	printf("\tMultiple characters are possible, e.g. -dump CV ; Default: RB\n");
-	printf("-joy1\n");
-	printf("\tEnable binding a gamepad to SNES controller port 1\n");
-	printf("-joy2\n");
-	printf("\tEnable binding a gamepad to SNES controller port 2\n");
-	printf("-joy3\n");
-	printf("\tEnable binding a gamepad to SNES controller port 3\n");
-	printf("-joy4\n");
-	printf("\tEnable binding a gamepad to SNES controller port 4\n");
-	printf("-sound <output device>\n");
-	printf("\tSet the output device used for audio emulation\n");
-	printf("\tIf output device is 'none', no audio is generated\n");
-	printf("-abufs <number of audio buffers>\n");
-	printf("\tSet the number of audio buffers used for playback. (default: 8)\n");
-	printf("\tIncreasing this will reduce stutter on slower computers,\n");
-	printf("\tbut will increase audio latency.\n");
-	printf("-rtc\n");
-	printf("\tSet the real-time-clock to the current system time and date.\n");
+	fprintf(stderr, "\nCommander X16 Emulator r%s (%s)\n", VER, VER_NAME);
+	fprintf(stderr, "(C)2019,2022 Michael Steil et al.\n");
+	fprintf(stderr, "All rights reserved. License: 2-clause BSD\n\n");
+	fprintf(stderr, "Usage: x16emu [option] ...\n\n");
+	fprintf(stderr, "-rom <rom.bin>\n");
+	fprintf(stderr, "\tOverride KERNAL/BASIC/* ROM file.\n");
+	fprintf(stderr, "-ram <ramsize>\n");
+	fprintf(stderr, "\tSpecify banked RAM size in KB (8, 16, 32, ..., 2048).\n");
+	fprintf(stderr, "\tThe default is 512.\n");
+	fprintf(stderr, "-nvram <nvram.bin>\n");
+	fprintf(stderr, "\tSpecify NVRAM image. By default, the machine starts with\n");
+	fprintf(stderr, "\tempty NVRAM and does not save it to disk.\n");
+	fprintf(stderr, "-keymap <keymap>\n");
+	fprintf(stderr, "\tEnable a specific keyboard layout decode table.\n");
+	fprintf(stderr, "-sdcard <sdcard.img>\n");
+	fprintf(stderr, "\tSpecify SD card image (partition map + FAT32)\n");
+	fprintf(stderr, "-prg <app.prg>[,<load_addr>]\n");
+	fprintf(stderr, "\tLoad application from the local disk into RAM\n");
+	fprintf(stderr, "\t(.PRG file with 2 byte start address header)\n");
+	fprintf(stderr, "\tThe override load address is hex without a prefix.\n");
+	fprintf(stderr, "-bas <app.txt>\n");
+	fprintf(stderr, "\tInject a BASIC program in ASCII encoding through the\n");
+	fprintf(stderr, "\tkeyboard.\n");
+	fprintf(stderr, "-run\n");
+	fprintf(stderr, "\tStart the -prg/-bas program using RUN or SYS, depending\n");
+	fprintf(stderr, "\ton the load address.\n");
+	fprintf(stderr, "-geos\n");
+	fprintf(stderr, "\tLaunch GEOS at startup.\n");
+	fprintf(stderr, "-warp\n");
+	fprintf(stderr, "\tEnable warp mode, run emulator as fast as possible.\n");
+	fprintf(stderr, "-echo [{iso|raw}]\n");
+	fprintf(stderr, "\tPrint all KERNAL output to the host's stdout.\n");
+	fprintf(stderr, "\tBy default, everything but printable ASCII characters get\n");
+	fprintf(stderr, "\tescaped. \"iso\" will escape everything but non-printable\n");
+	fprintf(stderr, "\tISO-8859-1 characters and convert the output to UTF-8.\n");
+	fprintf(stderr, "\t\"raw\" will not do any substitutions.\n");
+	fprintf(stderr, "\tWith the BASIC statement \"LIST\", this can be used\n");
+	fprintf(stderr, "\tto detokenize a BASIC program.\n");
+	fprintf(stderr, "-log {K|S|V}...\n");
+	fprintf(stderr, "\tEnable logging of (K)eyboard, (S)peed, (V)ideo.\n");
+	fprintf(stderr, "\tMultiple characters are possible, e.g. -log KS\n");
+	fprintf(stderr, "-gif <file.gif>[,wait]\n");
+	fprintf(stderr, "\tRecord a gif for the video output.\n");
+	fprintf(stderr, "\tUse ,wait to start paused.\n");
+	fprintf(stderr, "\tPOKE $9FB5,2 to start recording.\n");
+	fprintf(stderr, "\tPOKE $9FB5,1 to capture a single frame.\n");
+	fprintf(stderr, "\tPOKE $9FB5,0 to pause.\n");
+	fprintf(stderr, "-scale {1|2|3|4}\n");
+	fprintf(stderr, "\tScale output to an integer multiple of 640x480\n");
+	fprintf(stderr, "-quality {nearest|linear|best}\n");
+	fprintf(stderr, "\tScaling algorithm quality\n");
+	fprintf(stderr, "-debug [<address>]\n");
+	fprintf(stderr, "\tEnable debugger. Optionally, set a breakpoint\n");
+	fprintf(stderr, "-dump {C|R|B|V}...\n");
+	fprintf(stderr, "\tConfigure system dump: (C)PU, (R)AM, (B)anked-RAM, (V)RAM\n");
+	fprintf(stderr, "\tMultiple characters are possible, e.g. -dump CV ; Default: RB\n");
+	fprintf(stderr, "-joy1\n");
+	fprintf(stderr, "\tEnable binding a gamepad to SNES controller port 1\n");
+	fprintf(stderr, "-joy2\n");
+	fprintf(stderr, "\tEnable binding a gamepad to SNES controller port 2\n");
+	fprintf(stderr, "-joy3\n");
+	fprintf(stderr, "\tEnable binding a gamepad to SNES controller port 3\n");
+	fprintf(stderr, "-joy4\n");
+	fprintf(stderr, "\tEnable binding a gamepad to SNES controller port 4\n");
+	fprintf(stderr, "-sound <output device>\n");
+	fprintf(stderr, "\tSet the output device used for audio emulation\n");
+	fprintf(stderr, "\tIf output device is 'none', no audio is generated\n");
+	fprintf(stderr, "-abufs <number of audio buffers>\n");
+	fprintf(stderr, "\tSet the number of audio buffers used for playback. (default: 8)\n");
+	fprintf(stderr, "\tIncreasing this will reduce stutter on slower computers,\n");
+	fprintf(stderr, "\tbut will increase audio latency.\n");
+	fprintf(stderr, "-rtc\n");
+	fprintf(stderr, "\tSet the real-time-clock to the current system time and date.\n");
 #ifdef TRACE
-	printf("-trace [<address>]\n");
-	printf("\tPrint instruction trace. Optionally, a trigger address\n");
-	printf("\tcan be specified.\n");
+	fprintf(stderr, "-trace [<address>]\n");
+	fprintf(stderr, "\tPrint instruction trace. Optionally, a trigger address\n");
+	fprintf(stderr, "\tcan be specified.\n");
 #endif
-	printf("-version\n");
-	printf("\tPrint additional version information of the emulator and ROM.\n");
-	printf("\n");
+	fprintf(stderr, "-version\n");
+	fprintf(stderr, "\tPrint additional version information of the emulator and ROM.\n");
+	fprintf(stderr, "\n");
 	exit(1);
 }
 
 void
 usage_keymap()
 {
-	printf("The following keymaps are supported:\n");
+	fprintf(stderr, "The following keymaps are supported:\n");
 	for (int i = 0; i < sizeof(keymaps)/sizeof(*keymaps); i++) {
 		printf("\t%s\n", keymaps[i]);
 	}
@@ -758,7 +758,7 @@ main(int argc, char **argv)
 
 	SDL_RWops *f = SDL_RWFromFile(rom_path, "rb");
 	if (!f) {
-		printf("Cannot open %s!\n", rom_path);
+		fprintf(stderr, "Cannot open %s!\n", rom_path);
 		exit(1);
 	}
 	size_t rom_size = SDL_RWread(f, ROM, ROM_SIZE, 1);
@@ -776,7 +776,7 @@ main(int argc, char **argv)
 	if (sdcard_path) {
 		sdcard_file = SDL_RWFromFile(sdcard_path, "r+b");
 		if (!sdcard_file) {
-			printf("Cannot open %s!\n", sdcard_path);
+			fprintf(stderr, "Cannot open %s!\n", sdcard_path);
 			exit(1);
 		}
 		sdcard_attach();
@@ -785,7 +785,7 @@ main(int argc, char **argv)
 	prg_override_start = -1;
 	if (prg_path) {
 		if (sdcard_file) {
-			printf("'-prg' cannot be combined with '-sdcard'!\n");
+			fprintf(stderr, "'-prg' cannot be combined with '-sdcard'!\n");
 			exit(1);
 		}
 
@@ -797,7 +797,7 @@ main(int argc, char **argv)
 
 		prg_file = SDL_RWFromFile(prg_path, "rb");
 		if (!prg_file) {
-			printf("Cannot open %s!\n", prg_path);
+			fprintf(stderr, "Cannot open %s!\n", prg_path);
 			exit(1);
 		}
 	}
@@ -805,7 +805,7 @@ main(int argc, char **argv)
 	if (bas_path) {
 		SDL_RWops *bas_file = SDL_RWFromFile(bas_path, "r");
 		if (!bas_file) {
-			printf("Cannot open %s!\n", bas_path);
+			fprintf(stderr, "Cannot open %s!\n", bas_path);
 			exit(1);
 		}
 		paste_text = paste_text_data;
@@ -831,11 +831,15 @@ main(int argc, char **argv)
 	// Available since SDL 2.0.8
 	SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
 #endif
-	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_GAMECONTROLLER | SDL_INIT_AUDIO);
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_GAMECONTROLLER | SDL_INIT_AUDIO) < 0) {
+		fprintf(stderr, "Cannot initialize SDL: %s\n", SDL_GetError());
+		exit(1);
+	}
 
 	audio_init(audio_dev_name, audio_buffers);
 
 	memory_init();
+
 	video_init(window_scale, scale_quality);
 
 	joystick_init();
@@ -856,6 +860,7 @@ main(int argc, char **argv)
 
 	audio_close();
 	video_end();
+	memory_close();
 	SDL_Quit();
 
 #ifdef PERFSTAT

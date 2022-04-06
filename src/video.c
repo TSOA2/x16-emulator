@@ -186,7 +186,11 @@ video_init(int window_scale, char *quality)
 	video_reset();
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, quality);
-	SDL_CreateWindowAndRenderer(SCREEN_WIDTH * window_scale, SCREEN_HEIGHT * window_scale, window_flags, &window, &renderer);
+	if (SDL_CreateWindowAndRenderer(SCREEN_WIDTH * window_scale, SCREEN_HEIGHT * window_scale, window_flags, &window, &renderer) < 0) {
+		fprintf(stderr, "Cannot create window and renderer: %s\n", SDL_GetError());
+		exit(1);
+	}
+
 #ifndef __MORPHOS__
 	SDL_SetWindowResizable(window, true);
 #endif

@@ -3,6 +3,7 @@
 // All rights reserved. License: 2-clause BSD
 
 #include <sys/types.h>
+#include <errno.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -31,6 +32,11 @@ void
 memory_init()
 {
 	RAM = calloc(RAM_SIZE, sizeof(uint8_t));
+	if (!RAM) {
+		fprintf(stderr, "Cannot allocate RAM: %s\n", strerror(errno));
+		exit(1);
+	}
+
 	memory_reset();
 }
 
@@ -40,6 +46,14 @@ memory_reset()
 	// default banks are 0
 	memory_set_ram_bank(0);
 	memory_set_rom_bank(0);
+}
+
+void
+memory_close()
+{
+	if (RAM) {
+		free(RAM);
+	}
 }
 
 static uint8_t

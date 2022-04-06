@@ -2,6 +2,8 @@
 
 #include <SDL.h>
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
 struct joystick_info {
 	int                 instance_id;
@@ -43,6 +45,10 @@ resize_joystick_controllers(int new_size)
 
 	struct joystick_info *old_controllers = Joystick_controllers;
 	Joystick_controllers                  = (struct joystick_info *)malloc(sizeof(struct joystick_info) * new_size);
+	if (!Joystick_controllers) {
+		fprintf(stderr, "Cannot allocate joystick controller buffers: %s\n", strerror(errno));
+		exit(1);
+	}
 
 	int min_size = new_size < Num_joystick_controllers ? new_size : Num_joystick_controllers;
 	if (min_size > 0) {
@@ -116,6 +122,10 @@ joystick_init(void)
 
 	Num_joystick_controllers = num_joysticks > 16 ? num_joysticks : 16;
 	Joystick_controllers     = malloc(sizeof(struct joystick_info) * Num_joystick_controllers);
+	if (!Joystick_controllers) {
+        fprintf(stderr, "Cannot allocate joystick controller buffers: %s\n", strerror(errno));
+        exit(1);
+    }
 
 	for (int i = 0; i < Num_joystick_controllers; ++i) {
 		Joystick_controllers[i].instance_id = -1;
